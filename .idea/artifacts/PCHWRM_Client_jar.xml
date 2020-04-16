@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PCHWRM_Client:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PCHWRM_Client_jar</output-path>
+    <root id="archive" name="PCHWRM_Client.jar">
+      <element id="module-output" name="PCHWRM_Client" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/jna-5.5.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/jna-platform-5.5.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
