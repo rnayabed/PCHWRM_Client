@@ -11,7 +11,6 @@ import java.awt.*;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -247,7 +246,7 @@ public class dash extends dashUI{
 
     Socket client;
 
-    DataOutputStream osx;
+    BufferedWriter osx;
 
     public void initGPUCPURAM() throws Exception
     {
@@ -266,6 +265,7 @@ public class dash extends dashUI{
                     if(isConnected)
                     {
                         writeToOS("QUIT");
+                        osx.close();
                         client.close();
                         isConnected=false;
                         Platform.runLater(()->{
@@ -299,7 +299,7 @@ public class dash extends dashUI{
                                 client = new Socket();
                                 client.connect(new InetSocketAddress(serverIPAddressTextField.getText(), Integer.parseInt(serverPortTextField.getText())), 2500);
 
-                                osx = new DataOutputStream(client.getOutputStream());
+                                osx = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
 
                                 writeToOS("CPU_GPU_MODELS!!"+cpuModel+"::"+gpuModel+"::");
 
@@ -396,15 +396,9 @@ public class dash extends dashUI{
 
     public void writeToOS(String txt) throws Exception
     {
-        byte[] by = txt.getBytes(StandardCharsets.UTF_8);
-        osx.writeUTF("buff_length::"+by.length+"::");
+        osx.write(txt+"\n");
         osx.flush();
-
-        osx.write(by);
-        osx.flush();
-        io.pln("SENT @ "+by.length);
     }
-
 
 
     public String doFormValidation()
