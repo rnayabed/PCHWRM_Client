@@ -118,9 +118,11 @@ public class dash extends dashUI{
                 exitItem.addActionListener(l->{
                     try {
                         if(isConnected){
+                            writeToOS("QUIT");
                             Thread.sleep(500);
                             isConnected=false;
                         }
+                        tray.remove(ti);
                         Platform.exit();
                     }
                     catch (Exception e)
@@ -519,7 +521,7 @@ public class dash extends dashUI{
         String out = io.getShellOutput("powershell.exe get-wmiobject -namespace root\\OpenHardwareMonitor -query 'SELECT Value,Name,SensorType FROM Sensor'").replace("\r\n\r\n__GENUS          : 2\r\n__CLASS          : Sensor\r\n__SUPERCLASS     : \r\n__DYNASTY        : \r\n__RELPATH        : \r\n__PROPERTY_COUNT : 3\r\n__DERIVATION     : {}\r\n__SERVER         : \r\n__NAMESPACE      : \r\n__PATH           : \r\n","");
         ArrayList<String[]> returnable = new ArrayList<>();
 
-        String[] x = out.split("PSComputerName   :");
+        String[] x = out.split("PSComputerName {3}:");
 
         for(int i =0;i<x.length - 1;i++)
         {

@@ -25,7 +25,7 @@ public class io {
         {
             File f = new File(fileName);
             if(!f.exists())
-                f.createNewFile();
+                if(!f.createNewFile()) throw new Exception("Insufficient Permissions to create "+fileName);
             BufferedWriter bf = new BufferedWriter(new FileWriter(fileName));
             bf.write(content);
             bf.close();
