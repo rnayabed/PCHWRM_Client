@@ -1,4 +1,4 @@
-# PCHWRM Server
+# PCHWRM Client
 PC Hardware Resource Monitor For [Raspberry Pi](https://www.raspberrypi.org/), Built with JavaFX
 
 [Screenshots](https://imgur.com/a/4H3YjMH)
